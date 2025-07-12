@@ -1,4 +1,4 @@
-import axios, { type AxiosResponse } from 'axios';
+import axios from 'axios';
 import { type Movie } from '../types/movie';
 
 interface FetchMoviesResponse {
@@ -19,7 +19,14 @@ export async function fetchMovies(query: string): Promise<Movie[]> {
     },
   };
 
-  const response: AxiosResponse<FetchMoviesResponse> = await axios.get('https://api.themoviedb.org/3/search/movie', config)
-
-  return response.data.results;
+  try {
+    const response = await axios.get<FetchMoviesResponse>(
+      'https://api.themoviedb.org/3/search/movie',
+      config
+    );
+    return response.data.results;
+  } catch (error) {
+    console.error('Error fetching movies:', error);
+    throw error; 
+  }
 }
