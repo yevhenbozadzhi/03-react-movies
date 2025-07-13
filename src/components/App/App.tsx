@@ -16,6 +16,7 @@ export default function App() {
 
   const handleSearch = async (formData: FormData) => {
     const query = (formData.get('query') as string)?.trim();
+   
 
     if (!query) {
       toast.error('Please enter your search query.');
@@ -44,7 +45,7 @@ export default function App() {
 
   return (
     <>
-      <SearchBar action={handleSearch} />
+      <SearchBar onSubmit={handleSearch} />
 
       {isLoading && <Loader />}
       {hasError && <ErrorMessage />}

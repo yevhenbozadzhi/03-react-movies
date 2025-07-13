@@ -1,10 +1,10 @@
 import css from '../css/SearchBar.module.css';
 
 interface SearchBarProps {
-  action: (formData: FormData) => void;
+  onSubmit: (formData: FormData) => void;
 }
 
-export default function SearchBar({ action }: SearchBarProps) {
+export default function SearchBar({ onSubmit }: SearchBarProps) {
   return (
     <header className={css.header}>
       <div className={css.container}>
@@ -17,7 +17,7 @@ export default function SearchBar({ action }: SearchBarProps) {
           Powered by TMDB
         </a>
 
-        <form className={css.form} action={action}>
+        <form className={css.form} action={onSubmit}>
           <input
             className={css.input}
             type="text"
